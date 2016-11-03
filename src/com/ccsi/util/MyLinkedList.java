@@ -258,6 +258,7 @@ public class MyLinkedList<E> implements List<E> {
                 temp = temp.next;
             }
         }
+        head=dummyHead.next;
 
         return set.isEmpty();
     }
