@@ -251,16 +251,62 @@ public class MyLinkedList<E> implements List<E> {
         Node<E> temp = dummyHead;
         while (temp.next != null) {
             if (set.contains(temp.next.val)) {
-                set.remove(temp.next.val);
+                set.remove(temp.next.val);  //如果要remove所有的值，此步省略就可以了。
                 temp.next = temp.next.next;
+                tail=temp;
                 size--;
             } else {
+                tail=temp;
                 temp = temp.next;
             }
+        }
+        while(tail.next!=null){
+            tail=tail.next;
         }
         head=dummyHead.next;
 
         return set.isEmpty();
+    }
+
+    public boolean removeAll1(Collection<?> c) {
+        if (size == 0) return false;
+
+        Map<E,Integer> map = new HashMap<>();
+        for (Object o : c) {
+            E target = (E) o;
+            if(!map.containsKey(target)){
+                map.put(target,0);
+            }
+
+            map.put(target,map.get(target)+1);
+        }
+
+        Node<E> dummyHead = new Node<>(null);
+        dummyHead.next = head;
+        Node<E> temp = dummyHead;
+        while (temp.next != null) {
+            if (map.containsKey(temp.next.val)) {
+                int count=map.get(temp.next.val);
+                count--;
+                if(count==0){
+                    map.remove(temp.next.val);
+                }else{
+                    map.put(temp.next.val,count);
+                }
+                temp.next = temp.next.next;
+                tail=temp;
+                size--;
+            } else {
+                tail=temp;
+                temp = temp.next;
+            }
+        }
+        while(tail.next!=null){
+            tail=tail.next;
+        }
+        head=dummyHead.next;
+
+        return map.isEmpty();
     }
 
     @Override
