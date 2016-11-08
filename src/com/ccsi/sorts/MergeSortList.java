@@ -1,11 +1,5 @@
 package com.ccsi.sorts;
 
-import java.util.List;
-import java.util.prefs.NodeChangeEvent;
-
-/**
- * Created by gxliu on 2016/11/6.
- */
 public class MergeSortList {
     private static ListNode head=null;
     private static ListNode tail=null;
