@@ -18,13 +18,13 @@ public class CountingSort {
         }
 
         for (int i = 1; i < max ; i++) {
-            bucket[i]+=bucket[i-1];
+            bucket[i]+=bucket[i-1];          //bucket存储的是比这个数字小的数字个数
         }
 
         int[] aux=a.clone();
         for (int i = 0; i < aux.length; i++) {
             int val=aux[i];
-            a[--bucket[val]]=val;
+            a[--bucket[val]]=val;           //不太明白，还需琢磨
         }
     }
 }
