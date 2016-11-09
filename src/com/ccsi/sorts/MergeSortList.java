@@ -42,12 +42,16 @@ public class MergeSortList {
             originalHead=originalHead.next;
             b=b.next.next;
         }
-        b=originalHead.next;
-        originalHead.next=null;
-        return merge(mergeSort(a),mergeSort(b));
+        b=originalHead.next;      //后半截list
+        originalHead.next=null;   //将a截断形成前半截list
+
+        return merge(mergeSort(a),mergeSort(b));  //关键步骤
     }
 
     public ListNode merge(ListNode a,ListNode b){
+        if(a==null)return b;
+        if(b==null)return a;               //不是必须， mergeSort中已经判断了
+
         ListNode dummyHead=new ListNode(Integer.MAX_VALUE);
         ListNode c=dummyHead;
         while(a!=null&&b!=null){
@@ -61,7 +65,8 @@ public class MergeSortList {
             c=c.next;
         }
         c.next=(a==null)?b:a;
-        head=dummyHead.next;
+        head=dummyHead.next;    //note，更新head，此步容易忘掉更新，否则getfirst的时候可能拿到的不是head
+
         return dummyHead.next;
     }
 }
