@@ -48,7 +48,7 @@ public class MergeSortList {
         return merge(mergeSort(a),mergeSort(b));  //关键步骤
     }
 
-    public ListNode merge(ListNode a,ListNode b){
+    public ListNode merge(ListNode a,ListNode b){ //原理和array的mergesort一样
         if(a==null)return b;
         if(b==null)return a;               //不是必须， mergeSort中已经判断了
 

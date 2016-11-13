@@ -47,9 +47,9 @@ public class HeapSort {
         buildHeap(a);
 
         for (int i = n; i >0 ; i--) {
-            swap(a,0,i);
+            swap(a,0,i);                //将最大值放到数组最后
             n=n-1;
-            maxHeap(a,0);
+            maxHeap(a,0);                //剩下的在做maxheap，循环将最大值放到后面，倒数第二，第三。。。
         }
     }
 
