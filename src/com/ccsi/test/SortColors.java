@@ -8,8 +8,8 @@ public class SortColors {
     public static void main(String[] args) {
         int[] a={1,1,2,0,1,2,0,1,2,0,1,1,2,2,2,0,1};
         //int[] a={1,2,0};
-        bucketSortColors(a);
-        //sortColors(a);
+        //bucketSortColors(a);
+        sortColors(a);
         for(int i:a){
             System.out.println(i);
         }
@@ -20,11 +20,8 @@ public class SortColors {
         int pivot=1;
         int p=0,q=nums.length-1;
         for (int i = 0; i <=q; i++) {
-            while(nums[i]<pivot&&i>p)swap(nums,i,p++);
-            while(nums[i]>pivot&&i<q){
-                swap(nums,i--,q--);
-                //if(nums[i]<pivot)i--;
-            }
+            while(nums[i]<pivot&&i>p)swap(nums,i--,p++);
+            while(nums[i]>pivot&&i<q)swap(nums,i--,q--);
         }
     }
     public static void swap(int[] a,int p,int q){
