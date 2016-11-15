@@ -14,13 +14,13 @@ public class HeapSort1 {
     public static void heapSort(int[] nums){
         if(nums==null||nums.length<=1)return;
         int len=nums.length;
-        for (int i = (len-1)/2; i >=0 ; i--) {
+        for (int i = (len-1)/2; i >=0 ; i--) {    //create heap
             max_heapify(nums,i,len-1);
         }
 
         for (int i = len-1; i >0 ; i--) {
-            swap(nums,0,i);
-            max_heapify(nums,0,i-1);
+            swap(nums,0,i);                       //将最大值放到最后，这时heap被破坏
+            max_heapify(nums,0,i-1);              //重新将剩下的数建堆，循环将剩下的最大值放到当时数组的最后
         }
     }
     public static void max_heapify(int[] nums,int start,int end){
