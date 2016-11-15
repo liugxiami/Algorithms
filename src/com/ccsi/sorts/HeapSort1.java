@@ -24,15 +24,15 @@ public class HeapSort1 {
         }
     }
     public static void max_heapify(int[] nums,int start,int end){
-        int parent=start;
-        int son=parent*2+1;
+        int dad=start;
+        int son=dad*2+1;
         while(son<=end){
             if(son+1<=end&&nums[son+1]>nums[son])son++; //如果两个孩子都存在，比较两个儿子的大小，取大儿子
-            if(nums[parent]>nums[son])return;           //如果父亲大，不变
+            if(nums[dad]>nums[son])return;           //如果父亲大，不变
             else{                                       //如果儿子大，交换一下
-                swap(nums,parent,son);
-                parent=son;
-                son=parent*2+1;
+                swap(nums,dad,son);
+                dad=son;
+                son=dad*2+1;
             }
         }
     }
