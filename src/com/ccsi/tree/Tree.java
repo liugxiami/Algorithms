@@ -7,8 +7,18 @@ import java.util.*;
  */
 public class Tree {
     public static void main(String[] args) {
-        TreeNode root=buildTreeTopDown();
-        System.out.println(countCompleteBinaryTreeNodes(root));
+        int[] arr={1,2,5,4,3,6,7};
+        TreeNode res=buildBST(arr,0,arr.length-1);
+
+        TreeNode root=new TreeNode(1);
+        root.left=new TreeNode(2);
+        root.right=new TreeNode(2);
+        root.left.left=new TreeNode(3);
+        root.left.right=new TreeNode(4);
+        root.right.left=new TreeNode(4);
+        root.right.right=new TreeNode(3);
+
+        TreeNode result=reverseTree(res);
     }
     //count complete binary tree nodes
     //左深=右深，那么必是满二叉树，满二叉树算节点数；左深=右深（+1），递归。
@@ -155,6 +165,214 @@ public class Tree {
         TreeNode n2=new TreeNode(2,n4,n5);
         TreeNode n3=new TreeNode(3,n6,n7);
         TreeNode root= new TreeNode(1,n2,n3);
+        return root;
+    }
+    //判断一个数是否左右对称,双queue BFS 方法
+    public static boolean isSymmetryBFS(TreeNode curr){
+        if(curr==null)return true;
+
+        Queue<TreeNode> leftQ=new LinkedList<>();
+        Queue<TreeNode> rightQ=new LinkedList<>();
+        leftQ.offer(curr.left);
+        rightQ.offer(curr.right);
+
+        while(!leftQ.isEmpty()&&!rightQ.isEmpty())
+        {
+            TreeNode leftNodes=leftQ.poll();
+            TreeNode rightNodes=rightQ.poll();
+            if(leftNodes==null&&rightNodes==null)return true;
+            if(leftNodes==null||rightNodes==null)return false;
+            if(leftNodes.val!=rightNodes.val)return false;
+            else {
+                leftQ.offer(leftNodes.left);
+                rightQ.offer(rightNodes.right);
+                leftQ.offer(leftNodes.right);
+                rightQ.offer(rightNodes.left);
+            }
+        }
+        return true;
+    }
+    //判断一个数是否左右对称,DFS 方法
+    public static boolean isSymmetryDFS(TreeNode root){
+        if(root==null)return true;
+        TreeNode leftTree=root.left;
+        TreeNode rightTree=root.right;
+        return inner_isSymmetryDFS(leftTree,rightTree);
+    }
+    public static boolean inner_isSymmetryDFS(TreeNode left,TreeNode right){
+        if(left==null&&right==null)return true;
+        if(left==null||right==null)return false;
+        if(left.val!=right.val)return false;
+        else{
+            return inner_isSymmetryDFS(left.left,right.right)&&inner_isSymmetryDFS(left.right,right.left);
+        }
+    }
+    //判断两棵树是否一样 DFS
+    public static boolean sameDFS(TreeNode leftTree, TreeNode rightTree){
+        if(leftTree==null&&rightTree==null)return true;
+        if(leftTree==null||rightTree==null)return false;
+        if(leftTree.val!=rightTree.val)return false;
+        else{
+            return sameDFS(leftTree.left,rightTree.left)&& sameDFS(leftTree.right,rightTree.right);
+        }
+    }
+    //判断两棵树是否一样 BFS
+    public static boolean sameBFS(TreeNode leftTree,TreeNode rightTree){
+
+        Queue<TreeNode> leftQ=new LinkedList<>();
+        Queue<TreeNode> rightQ=new LinkedList<>();
+
+        leftQ.offer(leftTree);
+        rightQ.offer(rightTree);
+
+        while(leftQ!=null&&rightQ!=null){
+            TreeNode leftNodes=leftQ.poll();
+            TreeNode rightNodes=rightQ.poll();
+            if(leftNodes==null&&rightNodes==null)return true;
+            if(leftNodes==null||rightNodes==null)return false;
+            if(leftNodes.val!=rightNodes.val)return false;
+            else{
+                leftQ.offer(leftNodes.left);
+                rightQ.offer(rightNodes.left);
+                leftQ.offer(leftNodes.right);
+                rightQ.offer(rightNodes.right);
+            }
+        }
+        return true;
+
+    }
+    //1.reverse a tree借助辅助函数
+    public static TreeNode reverse(TreeNode root){
+        if(root==null)return root;
+        inner_reverse(root.left,root.right);
+        return root;
+    }
+    public static void inner_reverse(TreeNode left,TreeNode right){
+        if(left==null&&right==null)return;
+        int temp=left.val;
+        left.val=right.val;
+        right.val=temp;
+        inner_reverse(left.left,right.right);
+        inner_reverse(left.right,right.left);
+    }
+
+    //2.reverse tree
+    public static TreeNode reverseTree(TreeNode root){
+        if(root==null||root.left==null&&root.right==null)return root;
+        else{
+            TreeNode temp=root.left;
+            root.left=root.right;
+            root.right=temp;
+
+            reverseTree(root.left);
+            reverseTree(root.right);
+            return root;
+        }
+
+    }
+    //在树找目标值存在不存在
+    public static boolean search(TreeNode root,int target){
+        if(root==null)return false;
+        if(root.val==target)return true;
+        return search(root.left,target)||search(root.right,target);
+    }
+    //求一颗树上的最大值
+    public static int max(TreeNode curr){
+        if(curr==null)return Integer.MIN_VALUE; //null值当量，求最大null=minimum,求最小值null=maximum
+        return Math.max(Math.max(max(curr.right),max(curr.left)),curr.val);
+    }
+    //求一棵树的树高height
+    public static int height(TreeNode root){
+        if(root==null)return -1;    //null值当量，求树高null=-1，求树和null=0，求树积null=1
+        return 1+Math.max(height(root.left),height(root.right));
+    }
+    //判读一棵树是不是BST,这方法不对，这只是判断了父节点与两子节点，不能保证所有左子树节点都比父节点小，右子树节点都比父节点大
+    public static Boolean isBST(TreeNode root){
+        if(root==null)return true;
+        else{
+            if(root.left!=null&&root.left.val>root.val)return false;
+            if(root.right!=null&&root.right.val<root.val)return false;
+            return isBST(root.left)&&isBST(root.right);
+        }
+    }
+    //Tim老师的方法 这方法也不对
+    public static boolean isBST_Tim(TreeNode root){
+        if(root==null)return true;
+        if(!isBST_Tim(root.left)||!isBST_Tim(root.right))return false;
+        if(root.left!=null&&root.left.val>root.val)return false;
+        if(root.right!=null&&root.right.val<root.val)return false;
+        return true;
+    }
+    //判读一棵树是不是BST,利用值得范围来做，左子树的所有节点值必定是小于父节点的值，右子树的所有节点的值必定是大于父节点
+    public static Boolean isBST_right(TreeNode root){
+        return inner_isBST(root,Integer.MIN_VALUE,Integer.MAX_VALUE);
+    }
+    public static Boolean inner_isBST(TreeNode curr,int low,int high){
+        if(curr==null)return true;   //low 和high不是index，此处判断node到叶子了没
+        else{
+            if(curr.val<=low||curr.val>=high)return false;
+            return inner_isBST(curr.left,low,curr.val)&&inner_isBST(curr.right,curr.val,high);
+        }
+    }
+
+    //pre-order序列化
+    public static void pre_Serialize(List<Integer> result,TreeNode root){
+        if(root==null)return;
+        result.add(root.val);
+        pre_Serialize(result,root.left);
+        pre_Serialize(result,root.right);
+    }
+    //in-order序列化
+    public static void in_Serialize(List<Integer> result,TreeNode root){
+        if(root==null)return;
+        in_Serialize(result,root.left);
+        result.add(root.val);
+        in_Serialize(result,root.right);
+    }
+    //post-order序列化
+    public static void post_Serialize(List<Integer> result,TreeNode root){
+        if(root==null)return;
+        post_Serialize(result,root.left);
+        post_Serialize(result,root.right);
+        result.add(root.val);
+    }
+
+    //在BST上找一个数值,loop with Queue，典型的BST方法
+    public static Boolean searchBST_loop_queue(TreeNode root,int target){
+        if(root==null)return false;
+        Queue<TreeNode> queue=new LinkedList<>();
+        queue.offer(root);
+        while(!queue.isEmpty()){
+            TreeNode temp=queue.poll();
+            if(temp.val==target)return true;
+            if(temp.left!=null&&target<temp.val) queue.offer(temp.left); //要注意不能将null传进queue
+            if(temp.right!=null&&target>temp.val) queue.offer(temp.right);
+        }
+        return false;
+    }
+    //在BST上找一个数值,loop（方法跟在Linkedlist找值有点相似 curr=curr.next，但效率高很多）背下来
+    public static Boolean searchBST_loop(TreeNode curr,int target){
+        while(curr!=null){
+            if(curr.val==target)return true;
+            curr=(target<curr.val)?curr.left:curr.right; //curr=curr.next很相似，但有个判断
+        }
+        return false;
+    }
+
+    //在BST上找一个数值,recursion
+    public static Boolean searchBST(TreeNode curr,int target){
+        if(curr==null)return false;   //典型的递归，第一步是basic case，判断
+        if(curr.val==target)return true; //recursive case
+        else if(target<curr.val)return searchBST(curr.left,target); //递归
+        else return searchBST(curr.right,target);
+    }
+    //给一个排好序的数组，建立一个BSTtree
+    public static TreeNode buildBST(int[] array,int li,int hi){
+        if(li==hi)return new TreeNode(array[li]);
+        int mi=li+(hi-li)/2;
+        TreeNode root=new TreeNode(array[mi]);
+        root.left=buildBST(array,li,mi-1);
+        root.right=buildBST(array,mi+1,hi);
         return root;
     }
 }
