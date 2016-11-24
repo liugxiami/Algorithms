@@ -18,7 +18,7 @@ public class Tree {
         root.right.left=new TreeNode(4);
         root.right.right=new TreeNode(3);
 
-        TreeNode result=reverseTree(res);
+        reverseTree(res);
     }
     //count complete binary tree nodes
     //左深=右深，那么必是满二叉树，满二叉树算节点数；左深=右深（+1），递归。
@@ -242,10 +242,9 @@ public class Tree {
 
     }
     //1.reverse a tree借助辅助函数
-    public static TreeNode reverse(TreeNode root){
-        if(root==null)return root;
+    public static void reverse(TreeNode root){
+        if(root==null)return;
         inner_reverse(root.left,root.right);
-        return root;
     }
     public static void inner_reverse(TreeNode left,TreeNode right){
         if(left==null&&right==null)return;
@@ -257,8 +256,8 @@ public class Tree {
     }
 
     //2.reverse tree
-    public static TreeNode reverseTree(TreeNode root){
-        if(root==null||root.left==null&&root.right==null)return root;
+    public static void reverseTree(TreeNode root){
+        if(root==null||root.left==null&&root.right==null)return;
         else{
             TreeNode temp=root.left;
             root.left=root.right;
@@ -266,7 +265,6 @@ public class Tree {
 
             reverseTree(root.left);
             reverseTree(root.right);
-            return root;
         }
 
     }
@@ -376,18 +374,4 @@ public class Tree {
         return root;
     }
 }
-class TreeNode{
-    int val;
-    TreeNode left;
-    TreeNode right;
 
-    public TreeNode(int val) {
-        this.val = val;
-    }
-
-    public TreeNode(int val, TreeNode left, TreeNode right) {
-        this.val = val;
-        this.left = left;
-        this.right = right;
-    }
-}
