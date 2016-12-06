@@ -20,7 +20,7 @@ public class HeapSort1 {
 
         for (int i = len-1; i >0 ; i--) {
             swap(nums,0,i);                       //将最大值放到最后，这时heap被破坏
-            max_heapify(nums,0,i-1);              //重新将剩下的数建堆，循环将剩下的最大值放到当时数组的最后
+            max_heapify(nums,0,i-1);              //重新将剩下的数建堆，循环将剩下的最大值放到当时数组的最后,直到堆结束
         }
     }
     public static void max_heapify(int[] nums,int start,int end){

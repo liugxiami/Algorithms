@@ -1,5 +1,7 @@
 package com.ccsi.test;
 
+import java.util.Random;
+
 /**
  * Created by gxliu on 2016/11/9.
  */
@@ -9,7 +11,7 @@ public class SortColors {
         int[] a={1,1,2,0,1,2,0,1,2,0,1,1,2,2,2,0,1};
         //int[] a={1,2,0};
         //bucketSortColors(a);
-        sortColors(a);
+        quick3way(a);
         for(int i:a){
             System.out.println(i);
         }
@@ -20,9 +22,28 @@ public class SortColors {
         int pivot=1;
         int p=0,q=nums.length-1;
         for (int i = 0; i <=q; i++) {
-            while(nums[i]<pivot&&i>p)swap(nums,i--,p++);
+            if(nums[i]<pivot&&i>p)swap(nums,i--,p++);
             while(nums[i]>pivot&&i<q)swap(nums,i--,q--);
         }
+    }
+    //quick3way
+    public static void quick3way(int[] nums){
+        if(nums==null||nums.length<=1)return;
+        sort(nums,0,nums.length-1);
+    }
+    private static void sort(int[] nums,int start,int end){
+        if(start>=end)return;
+        int ran=new Random().nextInt(end-start)+start;
+        swap(nums,start,ran);
+        int pivot=nums[start];
+        int lt=start,ht=end,idx=start+1;
+        while(idx<=ht){
+            if(nums[idx]<pivot)swap(nums,idx++,lt++);
+            else if(nums[idx]>pivot)swap(nums,idx,ht--);
+            else idx++;
+        }
+        sort(nums,start,lt-1);
+        sort(nums,ht+1,end);
     }
     public static void swap(int[] a,int p,int q){
         if(p!=q) {
