@@ -3,52 +3,48 @@ package com.ccsi.util;
 /**
  * Created by gxliu on 2016/12/11.
  */
-public class UnionFind3 {
+public class UnionFind4 {
     private int[] id;
-    private int[] sz;    //额外建一个数组来保存树的大小
+    private int[] height;
     private int count;
 
-    public UnionFind3(int N) {
+    public UnionFind4(int N) {
         this.count=N;
-        this.id = new int[N];        //建树
+        this.id=new int[N];
         for (int i = 0; i < N; i++) {
             id[i]=i;
         }
-        this.sz=new int[N];           //每课树大小都是1，刚开始
+        this.height=new int[N];
         for (int i = 0; i < N; i++) {
-            sz[i]=1;
+            height[i]=0;
         }
     }
-
     public int count(){
         return this.count;
     }
-
     public boolean connected(int p,int q){
         int pID=find(p);
         int qID=find(q);
         return pID==qID;
     }
-
-    public int find(int v){        //和quick union一样
+    public int find(int v){
         while(v!=id[v]){
             v=id[v];
         }
         return v;
     }
-    //size weighted union
-    //总是将小树接到大树的根上， note:如果用树高来做，是否更快？就是将树高矮的树接到树高高的树的根上。UnionFind4
+    //height weighted union
     public void union(int p,int q){
         int pID=find(p);
         int qID=find(q);
-        if(connected(p,q))return;
+        if(pID==qID)return;
 
-        if(sz[pID]<sz[qID]){
+        if(height[pID]<height[qID]){
             id[pID]=qID;
-            sz[qID]+=sz[pID];
+            height[qID]=Math.max(height[qID],height[pID]+1);
         }else{
             id[qID]=pID;
-            sz[pID]+=sz[qID];
+            height[pID]=Math.max(height[pID],height[qID]+1);
         }
         count--;
     }
