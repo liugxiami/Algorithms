@@ -64,9 +64,10 @@ public class AVLTree {
     public void insert(Comparable x){
         root=insert(x,root);
     }
+
     private AvlNode insert(Comparable x,AvlNode t){
         if(t==null){
-            root=new AvlNode(x,null,null);
+            t=new AvlNode(x,null,null);
         }else if(x.compareTo(t.element)<0){
             t.left=insert(x,t.left);
             if(height(t.left)-height(t.right)>=2){
