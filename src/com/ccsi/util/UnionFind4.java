@@ -1,5 +1,7 @@
 package com.ccsi.util;
 
+import java.util.Scanner;
+
 /**
  * Created by gxliu on 2016/12/11.
  */
@@ -47,5 +49,18 @@ public class UnionFind4 {
             height[pID]=Math.max(height[pID],height[qID]+1);
         }
         count--;
+    }
+    public static void main(String[] args) {
+        Scanner scanner=new Scanner(System.in);
+        int N=scanner.nextInt();
+        UnionFind4 uf=new UnionFind4(N);
+        while(scanner.hasNext()){
+            int p=scanner.nextInt();
+            int q=scanner.nextInt();
+            if(uf.connected(p,q))continue;
+            uf.union(p,q);
+            System.out.println(p+" "+q);
+        }
+        System.out.println(uf.count+"Components");
     }
 }
