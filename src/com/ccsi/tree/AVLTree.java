@@ -23,6 +23,10 @@ public class AVLTree {
 
     AvlNode root;
 
+    public AVLTree() {
+        root=null;
+    }
+
     private int height(AvlNode t){
         return t==null?-1:t.height;
     }
@@ -55,10 +59,6 @@ public class AVLTree {
             if(curr.left!=null)queue.offer(curr.left);
             if(curr.right!=null)queue.offer(curr.right);
         }
-    }
-
-    public AVLTree() {
-        root=null;
     }
 
     public void insert(Comparable x){
@@ -113,5 +113,25 @@ public class AVLTree {
     private AvlNode doubleWithRightChild(AvlNode root){
         AvlNode t=rotateWithLeftChild(root.right);
         return rotateWithRightChild(root);
+    }
+    public static void main(String[] args) {
+
+        AVLTree t = new AVLTree();
+        final int NUMS = 30;
+        final int GAP = 37;
+
+        System.out.println("Checking... (no more output means success)");
+
+        for (int i = GAP; i != 0; i = (i + GAP) % NUMS) {
+            System.out.print(i + " ");
+            t.insert(new Integer(i));
+        }
+
+        System.out.println();
+        if (NUMS < 40) {
+            t.printTree();
+            t.layerPrint();
+        }
+
     }
 }
