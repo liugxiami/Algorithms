@@ -42,14 +42,14 @@ public class AVLTree {
             printTree(root);
         }
     }
-
+    //inorder DFS
     private void printTree(AvlNode curr){
         if(curr==null)return;
         printTree(curr.left);
         System.out.println(curr.element);
         printTree(curr.right);
     }
-
+    //BFS
     public void layerPrint(){
         Queue<AvlNode> queue=new LinkedList<>();
         queue.offer(root);
