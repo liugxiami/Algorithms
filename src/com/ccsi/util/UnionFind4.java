@@ -7,7 +7,7 @@ import java.util.Scanner;
  */
 public class UnionFind4 {
     private int[] id;
-    private int[] height;
+    private int[] rank;
     private int count;
 
     public UnionFind4(int N) {
@@ -16,9 +16,9 @@ public class UnionFind4 {
         for (int i = 0; i < N; i++) {
             id[i]=i;
         }
-        this.height=new int[N];
+        this.rank=new int[N];
         for (int i = 0; i < N; i++) {
-            height[i]=0;
+            rank[i]=0;
         }
     }
     public int count(){
@@ -41,12 +41,12 @@ public class UnionFind4 {
         int qID=find(q);
         if(pID==qID)return;
 
-        if(height[pID]<height[qID]){
+        if(rank[pID]<rank[qID]){
             id[pID]=qID;
-            height[qID]=Math.max(height[qID],height[pID]+1);
+            rank[qID]=Math.max(rank[qID],rank[pID]+1);
         }else{
             id[qID]=pID;
-            height[pID]=Math.max(height[pID],height[qID]+1);
+            rank[pID]=Math.max(rank[pID],rank[qID]+1);
         }
         count--;
     }

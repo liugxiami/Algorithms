@@ -29,7 +29,7 @@ public class SurroundedRegions {
             this.canFlip = true;
         }
     }
-    private UFElement[][] items;
+    private UFElement[][] items;    //与传进来的数组一致
     private int count=0;
 
     private void makeSet(char[][] grid){
