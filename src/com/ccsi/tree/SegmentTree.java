@@ -2,6 +2,7 @@ package com.ccsi.tree;
 
 /**
  * Created by gxliu on 2016/12/16.
+ * 求区间最小值，最大值，和等等，用线段树
  * 注意，无论是在建树还是在更新树，都要更新特征值，此步容易忘掉
  */
 public class SegmentTree {
