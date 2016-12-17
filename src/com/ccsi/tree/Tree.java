@@ -302,14 +302,14 @@ public class Tree {
         return true;
     }
     //判读一棵树是不是BST,利用值得范围来做，左子树的所有节点值必定是小于父节点的值，右子树的所有节点的值必定是大于父节点
-    public static Boolean isBST_right(TreeNode root){
-        return inner_isBST(root,Integer.MIN_VALUE,Integer.MAX_VALUE);
+    public static Boolean isBSTRight(TreeNode root){
+        return isBST(root,Integer.MIN_VALUE,Integer.MAX_VALUE);
     }
-    public static Boolean inner_isBST(TreeNode curr,int low,int high){
+    private static Boolean isBST(TreeNode curr, int low, int high){
         if(curr==null)return true;   //low 和high不是index，此处判断node到叶子了没
         else{
             if(curr.val<=low||curr.val>=high)return false;
-            return inner_isBST(curr.left,low,curr.val)&&inner_isBST(curr.right,curr.val,high);
+            return isBST(curr.left,low,curr.val)&& isBST(curr.right,curr.val,high);
         }
     }
 
