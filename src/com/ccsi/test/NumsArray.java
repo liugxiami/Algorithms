@@ -11,6 +11,7 @@ public class NumsArray {
         na.update(3,10);
         System.out.println(na.sumRange(0,4));
     }
+
     private static class Node{
         int start;
         int end;
@@ -28,6 +29,7 @@ public class NumsArray {
     }
     private Node root;
     private int[] numbers;
+    //DFS similar with buildBST
     private Node buildTree(int[] nums,int start,int end){
         if(start==end)return new Node(start,end,nums[start]);
         Node root=new Node(start,end);       //必须声明一个root，非实例参数root；
