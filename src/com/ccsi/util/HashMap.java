@@ -14,7 +14,7 @@ public class HashMap {
         }
     }
     private Entry[] entries;
-    private int capacity=3;
+    private int capacity=37;
     private int count;
 
     public HashMap() {
