@@ -1,7 +1,5 @@
 package com.ccsi.graph;
 
-import com.sun.scenario.effect.impl.state.LinearConvolveKernel;
-
 import java.util.*;
 
 /**
@@ -20,11 +18,25 @@ public class Graph {
 
     public void dfs(Node root){
         if(root==null)return;
-        System.out.println(root.name);
+        System.out.println(root.name);   //pre-order
         for(Node child:root.children){
             dfs(child);
         }
     }
+
+    private Queue<String> pre=new LinkedList<>();
+    private Queue<String> post=new LinkedList<>();
+    private Stack<String> reversePost=new Stack<>();
+    public void dfs1(Node root){
+        if(root==null)return;
+        pre.offer(root.name);      //preorder
+        for(Node child:root.children){
+            dfs(child);
+        }
+        post.offer(root.name);   //post-order
+        reversePost.push(root.name);
+    }
+
     //按层打印，双queue
     public void bfs(Node root){
         Queue<Node> queue=new LinkedList<>();
