@@ -29,6 +29,11 @@ public class Dijkstra {
                     dis[j]=Math.min(dis[j],dis[idx]+graph[idx][j]);    //关键步骤，
                 }
             }
+
+            for (int j = 0; j < len; j++) {    //打印
+                System.out.print(dis[j]+" ");
+            }
+            System.out.println();
         }
         return dis[len-3];
     }
