@@ -6,6 +6,17 @@ import java.util.*;
  * Created by gxliu on 2016/12/28.
  */
 public class LC310MinimumHeightTrees {
+
+    class Node{
+        int val;
+        List<Node> children;
+
+        public Node(int val) {
+            this.val = val;
+            this.children = new ArrayList<>();
+        }
+    }
+
     public List<Integer> findMinHeightTrees(int n,int[][] edges){
         List<Integer> res=new LinkedList<>();
         if(n==0)return res;
@@ -71,13 +82,5 @@ public class LC310MinimumHeightTrees {
         return nodes[index];
     }
 
-    class Node{
-        int val;
-        List<Node> children;
 
-        public Node(int val) {
-            this.val = val;
-            this.children = new ArrayList<>();
-        }
-    }
 }
