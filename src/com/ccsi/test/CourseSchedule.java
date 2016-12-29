@@ -34,6 +34,7 @@ public class CourseSchedule {
                 else return -1;
             }
         });
+
         Course[] array=new Course[numCourses];
         for (int i = 0; i < numCourses; i++) {
             Course course=new Course(i);
