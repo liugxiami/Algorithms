@@ -37,12 +37,26 @@ public class LC310MinimumHeightTrees {
             nodes[edges[i][0]].children.add(nodes[edges[i][1]]);
             nodes[edges[i][1]].children.add(nodes[edges[i][0]]);
         }
-
+        //1.DFS
         //List<Integer> path1=findLongestPath(nodes[0],nodes);
         //List<Integer> path2=findLongestPath(nodes[path1.get(path1.size()-1)],nodes);
 
-        List<Integer> path1=findLongestPathBFS(nodes[0],nodes);
-        List<Integer> path2=findLongestPathBFS(nodes[path1.get(path1.size()-1)],nodes);
+        //2.BFS
+        //List<Integer> path1=findLongestPathBFS(nodes[0],nodes);
+        //List<Integer> path2=findLongestPathBFS(nodes[path1.get(path1.size()-1)],nodes);
+
+        //3.BFS 改进版
+        int[] pre1=new int[n];
+        for (int i = 0; i < n; i++) {
+            pre1[i]=-1;
+        }
+        List<Integer> path1=findLongestPathBFS(nodes[0],nodes,pre1);
+        int[] pre2=new int[n];
+        for (int i = 0; i < n; i++) {
+            pre2[i]=-1;
+        }
+        List<Integer> path2=findLongestPathBFS(nodes[path1.get(path1.size()-1)],nodes,pre2);
+        //
 
         int size=path2.size();
         if(size%2==0){
@@ -52,6 +66,7 @@ public class LC310MinimumHeightTrees {
         return res;
     }
 
+    //1.DFS
     private List<Integer> findLongestPath(Node root,Node[] nodes){
         Stack<Integer> path=new Stack<>();
         List<Integer> max=new ArrayList<>();
@@ -78,6 +93,7 @@ public class LC310MinimumHeightTrees {
         visited.remove(root.val);
     }
 
+    //2.BFS
     private List<Integer> findLongestPathBFS(Node root,Node[] nodes){
         List<Integer> res=new ArrayList<>();
 
@@ -117,6 +133,41 @@ public class LC310MinimumHeightTrees {
         return res;
     }
 
+    //3.BFS 改进版，利用一数组pre[1]=2(1的father是2),来表示father
+    private List<Integer> findLongestPathBFS(Node root,Node[] nodes,int[] pre){
+        List<Integer> res=new ArrayList<>();
+
+        Queue<Node> queue=new LinkedList<>();
+        queue.offer(root);
+
+        Set<Integer> visited=new HashSet<>();
+
+        Node ret=null;
+        while(!queue.isEmpty()){
+            Queue<Node> tempQueue=new LinkedList<>(); //BFS中按层记录
+            while(!queue.isEmpty()){
+                Node curr=queue.poll();
+                visited.add(curr.val);
+                ret=curr;
+
+                for(Node n:curr.children){
+                    if(!visited.contains(n.val)){
+                        tempQueue.add(n);
+                        pre[n.val]=curr.val;         //关键在这
+                    }
+                }
+            }
+            queue=tempQueue;
+        }
+
+        int curr=ret.val;                            //该版本的好处是，不像DFS那样可能stackoverflow,也不用像BFS那样占用太多的内存
+        while(pre[curr]!=-1){
+            res.add(0,pre[curr]);
+            curr=pre[curr];
+        }
+
+        return res;
+    }
     private Node createIfNotExist(Integer index,Node[] nodes ){
         if(nodes[index]==null){
             nodes[index]=new Node(index);
