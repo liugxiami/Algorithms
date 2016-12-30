@@ -58,20 +58,20 @@ public class LC310MinimumHeightTrees {
     }
 
     private void dfs(Node root,Node[] nodes,Stack<Integer> path,List<Integer> max,Set<Integer> visited){
-        path.push(root.val);
-        visited.add(root.val);
+        path.push(root.val);                          //用stack比用list方便
+        visited.add(root.val);                        //标记是否被访问过
         for(Node child:root.children){
             if(!visited.contains(child)){
-                dfs(child,nodes,path,max,visited);
+                dfs(child,nodes,path,max,visited);    //BT总是在判断语句之后进入下一层，保证传入不为空。
             }
         }
 
-        if(path.size()>max.size()){
+        if(path.size()>max.size()){                   //返回时做点事
             max.clear();
             max.addAll(path);
         }
 
-        path.pop();
+        path.pop();                                   //backtracking的套路
         visited.remove(root.val);
     }
 
