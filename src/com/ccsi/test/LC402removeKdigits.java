@@ -40,15 +40,16 @@ public class LC402removeKdigits {
         while(stack.get(0)=='0'){
             stack.remove(0);
         }
-        String result="";
+
+        StringBuffer result=new StringBuffer();
         while(!stack.isEmpty()){
-            result=stack.pop()+result;
+            result=result.append(stack.pop());
         }
-        return result;
+        return result.reverse().toString();
     }
 
     public static void main(String[] args) {
         String s="0001432219";
-        System.out.println(removeKdigits(s,3));
+        System.out.println(removeKdigits1(s,3));
     }
 }
