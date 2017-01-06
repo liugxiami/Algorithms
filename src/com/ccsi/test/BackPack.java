@@ -1,5 +1,9 @@
 package com.ccsi.test;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Stack;
+
 /**
  * Created by gxliu on 2017/1/4.
  */
@@ -8,7 +12,7 @@ public class BackPack {
         int[] weights={2,3,4,5,6};
         int[] volumes={1,4,3,6,8};
         int total=12;
-        System.out.println(dynamicProgramming1(total,weights,volumes));
+        bt(total,weights,volumes);
     }
     //1.recursion
     private static int max=0;
@@ -80,5 +84,30 @@ public class BackPack {
             pre=curr;
         }
         return pre[total];
+    }
+    //4.backtracking 保存solution
+    static List<Integer> solutions=new ArrayList<>();
+    public static void bt(int total,int[] weights,int[] volumes){
+        bt(total,weights,volumes,0,0,new Stack<Integer>());
+        for(Integer i:solutions){
+            System.out.println(i);
+        }
+        System.out.println(max);
+    }
+    private static void bt(int total,int[] weights,int[] volumes,int curr,int idx,Stack<Integer> currSolution){
+        if(total<=0||idx>=weights.length){
+            if(curr>max){
+                max=curr;
+                solutions.clear();
+                solutions.addAll(currSolution);
+            }
+            return;
+        }
+        bt(total,weights,volumes,curr,idx+1,currSolution);
+        if(total-volumes[idx]>=0){
+            currSolution.push(idx);
+            bt(total-volumes[idx],weights,volumes,curr+weights[idx],idx+1,currSolution);
+            currSolution.pop();
+        }
     }
 }
