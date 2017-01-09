@@ -7,18 +7,19 @@ public class BigIntMutliply {
     public static void main(String[] args) {
         String a="12345678";
         String b="87654321";
-        System.out.println(bigIntMutiply(a,b));
+        System.out.println(bigIntMultiply(a,b));
     }
 
-    private static String  bigIntMutiply(String X,String Y){
-        String result="";
+    private static String bigIntMultiply(String X,String Y){
         int len=Math.max(X.length(),Y.length());
-        X=numberFormat(X,len);
-        Y=numberFormat(Y,len);
 
         if(len<=4){
             return String.format("%d",Integer.parseInt(X)*Integer.parseInt(Y));
         }
+
+        String result="";
+        X=numberFormat(X,len);
+        Y=numberFormat(Y,len);
 
         int len1=len/2;
         int len2=len-len1;
@@ -28,10 +29,10 @@ public class BigIntMutliply {
         String C=Y.substring(0,len1);
         String D=Y.substring(len1);
 
-        String AC=bigIntMutiply(A,C);
-        String AD=bigIntMutiply(A,D);
-        String BC=bigIntMutiply(B,C);
-        String BD=bigIntMutiply(B,D);
+        String AC=bigIntMultiply(A,C);
+        String AD=bigIntMultiply(A,D);
+        String BC=bigIntMultiply(B,C);
+        String BD=bigIntMultiply(B,D);
 
         String ADBC=add(AD,BC);
 
