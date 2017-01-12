@@ -137,6 +137,7 @@ public class CountObjects {
             this.col = col;
         }
     }
+
     public static int[][] buildImage(){
         int rowNum=10;
         int colNum=10;
