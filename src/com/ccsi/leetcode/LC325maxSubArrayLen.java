@@ -1,7 +1,5 @@
 package com.ccsi.leetcode;
 
-import com.ccsi.util.HashMap;
-
 import java.util.*;
 
 /**
@@ -18,9 +16,9 @@ public class LC325maxSubArrayLen {
         for (int i = 1; i < len; i++) {
             nums[i]+=nums[i-1];
         }
-        Map<Integer,Integer> lookup=new java.util.HashMap<>();
+        Map<Integer,Integer> lookup=new HashMap<>();
 
-        lookup.put(0,-1);
+        lookup.put(0,-1);   //lookup map 初始化
         int maxLen=0;
         for (int i = 0; i < len; i++) {
             if(!lookup.containsKey(nums[i])){
