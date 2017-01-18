@@ -27,7 +27,7 @@ public class LC299bullsAndCows {
             total+=Math.min(s[i],g[i]);                   //统计总的相同的字符数
         }
 
-        cows=total-bulls;                                 //总字符数-bulls是cows
+        cows=total-bulls;                                 //总字符数-bulls是
         return String.format("%dA%dB",bulls,cows);
     }
 
