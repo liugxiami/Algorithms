@@ -15,10 +15,7 @@ public class LC293flipGame {
 
     public static List<String> generatePossibleNextMove(String s){
         List<String> res=new ArrayList<>();
-        if(s==null||s.length()<2){
-            res.add(s);
-            return res;
-        }
+        if(s==null||s.length()<2) return res;
 
         char[] chars=s.toCharArray();
         int len=s.length();
