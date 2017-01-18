@@ -18,18 +18,19 @@ public class LC325maxSubArrayLen {
         }
         Map<Integer,Integer> lookup=new HashMap<>();
 
-        lookup.put(0,-1);   //lookup map 初始化
+        lookup.put(0,-1);   //lookup map 初始化，容易漏，此处是第一次出现的0，
+
         int maxLen=0;
         for (int i = 0; i < len; i++) {
-            if(!lookup.containsKey(nums[i])){
-                lookup.put(nums[i],i);
-            }
 
             int diff=nums[i]-k;
             if(lookup.containsKey(diff)){
-                maxLen=Math.max(maxLen,i-lookup.get(diff));
+                maxLen=Math.max(maxLen,i-lookup.get(diff));  //greedy
             }
 
+            if(!lookup.containsKey(nums[i])){
+                lookup.put(nums[i],i);                        //如果库里不包含，则保存入map
+            }
         }
         return maxLen;
     }
