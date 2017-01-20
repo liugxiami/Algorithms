@@ -48,7 +48,7 @@ public class LC270closestBSTValue {
         else return helper(curr.right,target,minDiff,result);
 
     }
-    //3.bfs
+    //3.bfs,这是binary search，单线往下找，所以根本没必要用queue，和方法一用loop基本是一样的
     public static int closestValue2(TreeNode root,int target){
         Queue<TreeNode> queue=new LinkedList<>();
         queue.offer(root);
