@@ -36,6 +36,7 @@ public class LC252meetingRoom {
         }
         return true;
     }
+
     //2.用Arrays.sort（）函数
     public static boolean canAttendMeetings1(Interval[] intervals){
         if(intervals==null||intervals.length==0)return false;
