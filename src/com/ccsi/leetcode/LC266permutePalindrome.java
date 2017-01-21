@@ -16,7 +16,8 @@ public class LC266permutePalindrome {
         int len=s.length();
         Set<Character> set=new HashSet<>();
         for (int i = 0; i < len; i++) {
-            if(!set.add(s.charAt(i)))set.remove(s.charAt(i));
+            Character c=s.charAt(i);
+            if(!set.add(c))set.remove(c);
         }
         return set.size()<=1;
     }
