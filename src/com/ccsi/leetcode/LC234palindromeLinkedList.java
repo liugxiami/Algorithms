@@ -10,14 +10,13 @@ public class LC234palindromeLinkedList {
     }
     public static boolean isPalindrome(ListNode head){
         if(head==null||head.next==null)return true;
-        ListNode slow=head;
-        ListNode fast=head;
-        while(fast!=null&&fast.next!=null){
-            slow=slow.next;
-            fast=fast.next.next;
-        }
 
-        ListNode after=reverseList(slow);
+        ListNode mid=findMid(head);
+
+        ListNode after=mid.next;          //后一段list从mid.next开始，保证后一段list是小于（1）等于前一段list。
+        mid.next=null;                    //截断前一段list。
+
+        after=LC206ReverseLinkedList.reverseList(after);
         ListNode pre=head;
 
         while(pre!=null&&after!=null){
@@ -31,20 +30,15 @@ public class LC234palindromeLinkedList {
         return true;
 
     }
-    private static ListNode reverseList(ListNode head){
+    private static ListNode findMid(ListNode head){    //快指针从head还是head.next开始，结果一样。
         if(head==null||head.next==null)return head;
-        ListNode pre=head;
-        ListNode curr=head.next;
-        while(curr!=null){
-            ListNode next=curr.next;
-            curr.next=pre;
-            pre=curr;
-            curr=next;
+        ListNode slow=head;
+        ListNode fast=head.next;
+        while(fast!=null&&fast.next!=null){
+            slow=slow.next;
+            fast=fast.next.next;
         }
-        head.next=null;
-        head=pre;
-
-        return head;
+        return slow;
     }
 
     public static ListNode buildLinkedList(){
