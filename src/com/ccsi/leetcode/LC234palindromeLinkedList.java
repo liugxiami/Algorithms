@@ -16,11 +16,11 @@ public class LC234palindromeLinkedList {
         ListNode after=mid.next;          //后一段list从mid.next开始，保证后一段list是小于（1）等于前一段list。
         mid.next=null;                    //截断前一段list。
 
-        after=LC206ReverseLinkedList.reverseList(after);
+        after=LC206ReverseLinkedList.reverseList(after);  //调用同一个package的函数
         ListNode pre=head;
 
         while(pre!=null&&after!=null){
-            if(pre.val!=after.val)return false;
+            if(pre.val!=after.val)return false;           //比较前后两list的值
             else{
                 pre=pre.next;
                 after=after.next;
