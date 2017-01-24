@@ -28,7 +28,7 @@ public class LC204countPrimes {
     }
 
     public static int countPrimes(int n){
-        boolean[] notPrime=new boolean[n+1];  //用primitive type
+        boolean[] notPrime=new boolean[n+1];  //介意boolean数组来标记是否是质数。
         int count=0;
         for (int i = 2; i <=n ; i++) {
             if(notPrime[i])continue;
