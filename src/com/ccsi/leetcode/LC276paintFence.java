@@ -7,7 +7,7 @@ public class LC276paintFence {
     public static void main(String[] args) {
         System.out.println(numWays(3,3));
     }
-    //1.递推
+    //1.递推（不好理解）
     public static int numWays(int n,int k){
         if(n==0)return 0;
         if(n==1)return k;
@@ -33,7 +33,7 @@ public class LC276paintFence {
         for (int i = 3; i <=n ; i++) {
             int temp=diffColors;
             diffColors=(diffColors+sameColors)*(k-1);
-            sameColors=temp;
+            sameColors=temp*1;
         }
         return diffColors+sameColors;
     }
