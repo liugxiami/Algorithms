@@ -5,9 +5,10 @@ package com.ccsi.test;
  */
 public class Fibo {
     public static void main(String[] args) {
-        System.out.println(fibo4(9));
+        System.out.println(fibo1(9));
     }
     public static int fibo1(int n){
+
         if(n<=2)return n;
         return fibo1(n-1)+fibo1(n-2);
     }
@@ -24,6 +25,7 @@ public class Fibo {
     }
 
     public static int fibo3(int n){
+
         if(n<=2)return n;
         int[] cache=new int[n+1];
 
@@ -41,6 +43,7 @@ public class Fibo {
         return helper(n,cache);
     }
     private static int helper(int n,int[] cache){
+
         if(n<=2)return n;
 
         if(cache[n]!=0)return cache[n];
