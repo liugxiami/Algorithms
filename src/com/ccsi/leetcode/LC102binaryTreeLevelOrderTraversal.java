@@ -10,7 +10,7 @@ public class LC102binaryTreeLevelOrderTraversal {
         TreeNode root=buildTree();
         List<List<Integer>> res=levelOrder(root);
     }
-    //双queue
+    //双
     public static List<List<Integer>> levelOrder(TreeNode root){
         List<List<Integer>> res=new ArrayList<>();
         if(root==null)return res;
@@ -27,10 +27,11 @@ public class LC102binaryTreeLevelOrderTraversal {
                 if(temp.right!=null)next.offer(temp.right);
             }
             queue=next;
-            res.add(list);
+            res.add(0,list);
         }
         return res;
     }
+
     public static TreeNode buildTree(){
         TreeNode root=new TreeNode(1);
         root.left=new TreeNode(2);
