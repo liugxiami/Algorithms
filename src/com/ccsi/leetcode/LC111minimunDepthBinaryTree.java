@@ -22,6 +22,7 @@ public class LC111minimunDepthBinaryTree {
         helper(root,level,minLevel);   //Pass integer by reference，用只有一个元素的数组来传递就可以了，
         return minLevel[0];
     }
+    //定深DFS
     //注意，Integer or int 不能传递数值，取巧可以用一个元素的数组。那么如果string的话用stringB
     private static void helper(TreeNode curr,int level,int[] minLevel){
 
