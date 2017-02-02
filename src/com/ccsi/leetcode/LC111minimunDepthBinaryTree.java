@@ -17,22 +17,21 @@ public class LC111minimunDepthBinaryTree {
     public static int minDepth(TreeNode root){
         if(root==null)return -1;
         int level=-1;
-        int[] minLevel=new int[1];
-        minLevel[0]=Integer.MAX_VALUE;
-        helper(root,level,minLevel);   //Pass integer by reference，用只有一个元素的数组来传递就可以了，
-        return minLevel[0];
+        helper(root,level);   //Pass integer by reference，用只有一个元素的数组来传递就可以了，可以用类变量来代替
+        return min;
     }
     //定深DFS
     //注意，Integer or int 不能传递数值，取巧可以用一个元素的数组。那么如果string的话用stringB
-    private static void helper(TreeNode curr,int level,int[] minLevel){
+    private static int min=Integer.MAX_VALUE; //定深用的参数放函数外面
+    private static void helper(TreeNode curr,int level){  //传深度
 
         level=level+1;
         if(curr.left==null&&curr.right==null){
-            minLevel[0]=minLevel[0]>level?level:minLevel[0];
+            min=min>level?level:min;
         }
         //此处没有else
-        if(curr.left!=null)helper(curr.left,level,minLevel);
-        if(curr.right!=null)helper(curr.right,level,minLevel);
+        if(curr.left!=null)helper(curr.left,level);
+        if(curr.right!=null)helper(curr.right,level);
     }
     //用BFS做好
     public static int minDepth1(TreeNode root){
