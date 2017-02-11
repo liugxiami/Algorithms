@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PublishConfigData" serverName="GitHub" uploadOnCheckin="7ddf7574-3f5d-4788-9025-3b043a32358c">
+    <serverData>
+      <paths name="GitHub">
+        <serverdata>
+          <mappings>
+            <mapping deploy="https://github.com/liugxiami/Algorithms004Array.git" local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+    </serverData>
+    <option name="myUploadOnCheckinName" value="GitHub" />
+  </component>
+</project>
