@@ -24,6 +24,7 @@ public class LC27removeElement {
         }
         return len;
     }
+
     private static void swap(int[] nums,int p,int q){
         if(p==q)return;
         int temp=nums[p];
@@ -32,14 +33,15 @@ public class LC27removeElement {
     }
 
     //方法2: stable
+    //相当于是快慢指针，慢指针用来记录结果数组，覆盖原先的数组，快指针在前面跑，并检查
+    //是否与target值是否相同，相同则跳过，不同则交给慢指针。
     public static int removeElement1(int[] nums,int val){
         if(nums==null||nums.length==0)return -1;
         int len=nums.length;
         int newLen=0;
         for (int i = 0; i < len; i++) {
-            if(nums[i]!=val){
-                nums[newLen++]=nums[i];
-            }
+            if(nums[i]==val) continue;
+            nums[newLen++]=nums[i];
         }
         return newLen;
     }

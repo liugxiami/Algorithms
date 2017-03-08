@@ -30,13 +30,15 @@ public class RadixSort {
         int NUM=10;
         int dev=10;
         for (int i = 0; i < count; i++) {
+            //声明一个list数组的方法
             List<Integer>[] bucket=new ArrayList[NUM];
             for (int j = 0; j < NUM; j++) {
                 bucket[j]=new ArrayList<>();   //初始化
             }
 
             for (int j = 0; j < a.length; j++) {
-                bucket[a[j]%dev*10/dev].add(a[j]); //取第n位数的方法，如取十位数，先对100取余，然后乘以10，再整除100.
+                //取第n位数的方法，如取十位数，先对100取余，然后乘以10，再整除100.
+                bucket[a[j]%dev*10/dev].add(a[j]);
             }
 
             int idx=0;

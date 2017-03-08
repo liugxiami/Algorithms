@@ -34,14 +34,11 @@ public class BoysGirlsQuickSort {
         int pivot=boys[start];
 
         int idx=start;
-        int pivotIndex=-1;
         for (int i = start; i <=end ; i++) {
             if(girls[i]<=pivot){
                 swap(girls,idx++,i);
-                if(girls[idx-1]==pivot)pivotIndex=idx-1;
             }
         }
-        swap(girls,pivotIndex,idx-1);
 
         int flag=girls[idx-1];
         int idex=start+1;
