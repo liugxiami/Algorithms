@@ -30,7 +30,7 @@ public class SerializationTree {
 
         int i=inStart;
         for (; i <=inEnd; i++) {
-            if(pivot==in[i])break;   //找出该根节点在inorder中的位置
+            if(pivot==in[i])break;   //找出该根节点在inorder中的位置(可以借助一个map<Integer,Integer>来装inorder)
         }
 
         //x-(preStart+1)=i-1-inStart==>x=i-inStart+preStart;
