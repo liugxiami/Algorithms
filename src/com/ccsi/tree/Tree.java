@@ -18,7 +18,7 @@ public class Tree {
         root.right.left=new TreeNode(4);
         root.right.right=new TreeNode(3);
 
-        reverseTree(res);
+        List<List<TreeNode>> result= findAllPath1(res);
     }
     //count complete binary tree nodes
     //左深=右深，那么必是满二叉树，满二叉树算节点数；左深=右深（+1），递归。
@@ -66,7 +66,7 @@ public class Tree {
     public static void bt(List<List<TreeNode>> bag, Stack<TreeNode> path, TreeNode curr){
         //因为压栈是做过检查，不可能出现curr==null的情况，所以不要做判断
         path.push(curr);
-        if(curr.left==null&&curr.right==null){
+        if(curr.left==null&&curr.right==null){   //到了叶子节点，入包
             bag.add(new ArrayList<>(path));
         }else{
             if(curr.left!=null)bt(bag,path,curr.left);
@@ -110,6 +110,40 @@ public class Tree {
         }
         return result;
     }
+
+    //利用loop来实现backtracking，单queue来实现。
+    public static List<List<TreeNode>> findAllPath1(TreeNode root){
+        List<List<TreeNode>> result=new LinkedList<>();   //返回用的result
+        List<TreeNode> init=new LinkedList<>();           //起始path
+        //准备一个存path的queue
+        Queue<List<TreeNode>> pathQueue=new LinkedList<>();
+
+        init.add(root);
+        //node进pathQueue
+        pathQueue.offer(init);
+        //BFS相通的步骤
+        while(!pathQueue.isEmpty()){
+            List<TreeNode> path=pathQueue.poll();    //都poll（）出来
+            TreeNode temp=path.get(path.size()-1);
+
+            if(temp.left==null&&temp.right==null){   //如果到叶子节点了，也就是找到路径了，做点什么事呢？
+                result.add(path);
+            }else{
+                if(temp.left!=null){                 //如果没结束，那么要更新path
+                    List<TreeNode> newPath=new LinkedList<>(path);
+                    newPath.add(temp.left);          //更新path
+                    pathQueue.offer(newPath);        //再进queue
+                }
+                if(temp.right!=null){                //同上
+                    List<TreeNode> newPath=new LinkedList<>(path);
+                    newPath.add(temp.right);
+                    pathQueue.offer(newPath);
+                }
+            }
+        }
+        return result;
+    }
+
     //BFS
     public static void BFS(TreeNode root){
         //if(root==null)return; 无须判断，因为不会有null传进来
@@ -218,7 +252,6 @@ public class Tree {
     }
     //判断两棵树是否一样 BFS
     public static boolean sameBFS(TreeNode leftTree,TreeNode rightTree){
-
         Queue<TreeNode> leftQ=new LinkedList<>();
         Queue<TreeNode> rightQ=new LinkedList<>();
 
@@ -284,7 +317,8 @@ public class Tree {
         if(root==null)return -1;    //null值当量，求树高null=-1，求树和null=0，求树积null=1
         return 1+Math.max(height(root.left),height(root.right));
     }
-    //判读一棵树是不是BST,这方法不对，这只是判断了父节点与两子节点，不能保证所有左子树节点都比父节点小，右子树节点都比父节点大
+    //判读一棵树是不是BST,这方法不对，这只是判断了父节点与两子节点，不能保证所有左子树节点都比父节点小，
+    // 右子树节点都比父节点大
     public static Boolean isBST(TreeNode root){
         if(root==null)return true;
         else{

@@ -37,11 +37,13 @@ public class SegmentTree {
     }
     //与构建BSTtree类似，但有一步不同，就是更新特征值
     private Node buildSegmentTree(int[] nums,int start,int end){
-        if(start==end)return new Node(nums[start],start,end);   //start==end 就是叶子节点，特征值就是相应数组里的值
+        if(start==end)return new Node(nums[start],start,end);
+        //start==end 就是叶子节点，特征值就是相应数组里的值
         int mi=start+(end-start)/2;
         Node root=new Node(start,end);
         root.left=buildSegmentTree(nums,start,mi);
-        root.right=buildSegmentTree(nums,mi+1,end);          //left 开始到mi和right则重mi+1开始到end，该性质在query时也要用到
+        root.right=buildSegmentTree(nums,mi+1,end);
+        //left 开始到mi和right则重mi+1开始到end，该性质在query时也要用到
         root.min=Math.min(root.left.min,root.right.min);    //更新特征值
         return root;
     }

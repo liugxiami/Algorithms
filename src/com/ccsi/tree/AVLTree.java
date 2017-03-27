@@ -1,11 +1,7 @@
 package com.ccsi.tree;
 
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.*;
 
-/**
- * Created by gxliu on 2016/12/12.
- */
 public class AVLTree {
     class AvlNode{
         Comparable element;
@@ -64,7 +60,7 @@ public class AVLTree {
     public void insert(Comparable x){
         root=insert(x,root);
     }
-
+    //key step
     private AvlNode insert(Comparable x,AvlNode t){
         if(t==null){
             t=new AvlNode(x,null,null);
@@ -90,6 +86,8 @@ public class AVLTree {
         t.height=Math.max(height(t.left),height(t.right))+1;
         return t;
     }
+
+    //左左情况
     private AvlNode rotateWithLeftChild(AvlNode root){
         AvlNode newRoot=root.left;
         root.left=newRoot.right;
@@ -98,6 +96,8 @@ public class AVLTree {
         newRoot.height=Math.max(height(newRoot.left),height(newRoot.right))+1;
         return newRoot;
     }
+
+    //右右情况
     private AvlNode rotateWithRightChild(AvlNode root){
         AvlNode newRoot=root.right;
         root.right=newRoot.left;
@@ -106,14 +106,19 @@ public class AVLTree {
         newRoot.height=Math.max(height(newRoot.left),height(newRoot.right))+1;
         return newRoot;
     }
+
+    //左右情况
     private AvlNode doubleWithLeftChild(AvlNode root){
         AvlNode t=rotateWithRightChild(root.left);
         return rotateWithLeftChild(root);
     }
+
+    //右左情况
     private AvlNode doubleWithRightChild(AvlNode root){
         AvlNode t=rotateWithLeftChild(root.right);
         return rotateWithRightChild(root);
     }
+
     public static void main(String[] args) {
 
         AVLTree t = new AVLTree();
