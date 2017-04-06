@@ -14,10 +14,11 @@ public class HashMap {
         }
     }
     private Entry[] entries;
-    private int capacity=37;
+    private int capacity;
     private int count;
 
     public HashMap() {
+        this.capacity=3;
         this.entries = new Entry[capacity];
         this.count = 0;
     }
@@ -28,10 +29,13 @@ public class HashMap {
 
     private void resize(){
         Entry[] oldEntries=entries.clone();
-        capacity=oldEntries.length*2;
+        //capacity=oldEntries.length*2;
         entries=new Entry[capacity];
+        this.count=0;
         for(Entry e:oldEntries){
-            put(e.key,e.value);
+            if(e!=null){
+                put(e.key,e.value);
+            }
         }
     }
 
@@ -39,11 +43,12 @@ public class HashMap {
         int index=hashCode(key);
 
         if(count*2>=capacity){
+            capacity*=2;
             resize();
         }
 
-        index%=capacity;
         while(true){
+            index%=capacity;
             if(entries[index]==null){
                 entries[index]=new Entry(key,value);
                 count++;
