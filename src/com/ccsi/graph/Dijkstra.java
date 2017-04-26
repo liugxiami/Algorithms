@@ -11,9 +11,10 @@ public class Dijkstra {
         int[] dis;
         boolean[] book=new boolean[len];  //记录是否已经确定
 
+        book[0]=true; //自己到自己是0，fix了的值
         dis=graph[0].clone();    //辅助数组
 
-        for (int i = 0; i < len; i++) {
+        for (int i = 0; i < len-1; i++) {
             int min=Integer.MAX_VALUE;
             int idx=-1;
             for (int j = 0; j < len; j++) {     //找最小值
@@ -35,7 +36,7 @@ public class Dijkstra {
             }
             System.out.println();
         }
-        return dis[len-3];
+        return dis[len-1];
     }
 
     public static void main(String[] args) {

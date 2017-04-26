@@ -18,10 +18,11 @@ public class LinkedHashMap {
         }
     }
     private Entry[] entries;
-    private int capacity=37;
+    private int capacity;
     private int count;
 
     public LinkedHashMap() {
+        this.capacity=37;
         this.entries = new Entry[capacity];
         this.count = 0;
     }
@@ -32,8 +33,13 @@ public class LinkedHashMap {
 
     public void put(int key, Object value){
         int position=hashCode(key);
+
+        if(2*count>=capacity){
+            capacity=capacity<<1;
+            restore();
+        }
         if(entries[position]==null){
-            entries[position]=new Entry(key,value);
+            entries[position]=new Entry(key,value); //this node becomes the head.
             count++;
         }else{
             Entry curr=entries[position];
@@ -50,10 +56,22 @@ public class LinkedHashMap {
         }
 
     }
+    private void restore(){
+        Entry[] oldEntries=entries.clone();
+        entries=new Entry[capacity];
+
+        count=0;
+        for(Entry entry:oldEntries){
+            while(entry!=null){
+                put(entry.key,entry.value);
+                entry=entry.next;
+            }
+        }
+    }
     public Entry positionOf(int key){
-        int postion=hashCode(key);
-        if(entries[postion]==null)return null;
-        Entry curr=entries[postion];
+        int position=hashCode(key);
+        if(entries[position]==null)return null;
+        Entry curr=entries[position];
         while(curr!=null){
             if(curr.key==key)return curr;
             curr=curr.next;
@@ -61,18 +79,18 @@ public class LinkedHashMap {
         return curr;
     }
     public void remove(int key){
+        int idx=hashCode(key);
         Entry curr=positionOf(key);
+
         if(curr==null)return;
 
         if(curr.pre==null){
-            curr.next.pre=null;
+            entries[idx]=curr.next;
         }else{
             curr.pre.next=curr.next;
         }
 
-        if(curr.next==null){
-            curr.pre.next=null;
-        }else{
+        if(curr.next!=null){
             curr.next.pre=curr.pre;
         }
 
