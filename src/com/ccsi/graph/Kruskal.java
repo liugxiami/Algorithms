@@ -17,13 +17,13 @@ public class Kruskal
         {
             return this.weight-compareEdge.weight;
         }
-    };
+    }
 
     // A class to represent a subset for union-find
     class subset
     {
         int parent, rank;
-    };
+    }
 
     int V, E;    // V-> no. of vertices & E->no.of edges
     Edge edge[]; // collection of all edges
@@ -40,7 +40,7 @@ public class Kruskal
 
     // A utility function to find set of an element i
     // (uses path compression technique)
-    int find(subset subsets[], int i)
+    int find(subset[] subsets, int i)
     {
         // find root and make root as parent of i (path compression)
         if (subsets[i].parent != i)
@@ -73,9 +73,9 @@ public class Kruskal
     }
 
     // The main function to construct MST using Kruskal's algorithm
-    void KruskalMST()
+    private void KruskalMST()
     {
-        Edge result[] = new Edge[V];  // Tnis will store the resultant MST
+        Edge[] result = new Edge[V];  // Tnis will store the resultant MST
         int e = 0;  // An index variable, used for result[]
         int i = 0;  // An index variable, used for sorted edges
         for (i=0; i<V; ++i)
@@ -86,8 +86,8 @@ public class Kruskal
         // can create a copy of array of edges
         Arrays.sort(edge);
 
-        // Allocate memory for creating V ssubsets
-        subset subsets[] = new subset[V];
+        // Allocate memory for creating V subsets
+        subset[] subsets = new subset[V];
         for(i=0; i<V; ++i)
             subsets[i]=new subset();
 

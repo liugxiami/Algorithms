@@ -56,7 +56,6 @@ public class LC310MinimumHeightTrees {
             pre2[i]=-1;
         }
         List<Integer> path2=findLongestPathBFS(nodes[path1.get(path1.size()-1)],nodes,pre2);
-        //
 
         int size=path2.size();
         if(size%2==0){
@@ -160,7 +159,7 @@ public class LC310MinimumHeightTrees {
             queue=tempQueue;
         }
 
-        int curr=ret.val;                            //该版本的好处是，不像DFS那样可能stackoverflow,也不用像BFS那样占用太多的内存
+        int curr=ret.val; //该版本的好处是，不像DFS那样可能stackoverflow,也不用像BFS那样占用太多的内存
         while(pre[curr]!=-1){
             res.add(0,pre[curr]);
             curr=pre[curr];
