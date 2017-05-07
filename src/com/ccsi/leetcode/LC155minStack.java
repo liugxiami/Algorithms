@@ -6,7 +6,8 @@ import java.util.Stack;
  * Created by gxliu on 2017/1/11.
  */
 public class LC155minStack {
-    //用两个栈来保存数据，一个正常栈，一个只保存比当前栈顶的小的数，当pop时，如果正常栈中pop的数与min栈顶一样，则也pop
+    //用两个栈来保存数据，一个正常栈，一个只保存比当前栈顶的小的数，
+    // 当pop时，如果正常栈中pop的数与min栈顶一样，则也pop
     Stack<Integer> mStack;
     Stack<Integer> mMinStack;
 

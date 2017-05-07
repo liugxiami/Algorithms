@@ -15,9 +15,11 @@ public class LC23MergeKsortedList {
             this.val = val;
         }
     }
+
     public static ListNode mergeKList(ListNode[] lists){
         return mergeKList(lists,0,lists.length-1);
     }
+
     private static ListNode mergeKList(ListNode[] lists,int start,int end){
         if(start==end)return lists[start];
 

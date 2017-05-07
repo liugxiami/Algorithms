@@ -61,7 +61,7 @@ public class BigIntMutliply {
         //同前的大数乘法，先拉平
         a=numberFormat(a,len);
         b=numberFormat(b,len);
-        //从后往前一对一相加，注意进位。
+        //从后往前按位加，注意进位。
         for (int i = len-1; i >= 0; i--) {
             int t=flag+(a.charAt(i)-'0')+(b.charAt(i)-'0');
             flag=t/10;
