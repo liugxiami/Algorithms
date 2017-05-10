@@ -31,7 +31,7 @@ public class LC78Subsets {
         subset.pop();
     }
     
-    //2.bit-mani
+    //2.bit-manipulation
     public static List<List<Integer>> subsets1(int[] nums){
         if(nums==null||nums.length==0)return result;
         
