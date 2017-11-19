@@ -12,7 +12,7 @@ public class LC69Sqrt {
         }
         System.out.println("========");
         for (int i = 0; i < array.length; i++) {
-            System.out.println(String.format("Sqrt(%d):%.2f",array[i],sqrtNewton(array[i],0.01)));
+            System.out.println(String.format("Sqrt(%d):%d",array[i],newTon(array[i],0.0001)));
         }
     }
     public static int sqrt(int x){
@@ -59,5 +59,16 @@ public class LC69Sqrt {
         }while(e0>e);
 
         return guess;
+    }
+
+    public static int newTon(double x,double e){
+        double guess=1.0;
+        double temp=1.0;
+        while(true){
+            temp=guess;
+            guess=(guess+x/guess)/2;
+            if(Math.abs(temp-guess)<e)break;
+        }
+        return (int)guess;
     }
 }

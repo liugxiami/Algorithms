@@ -7,7 +7,7 @@ import java.util.*;
  */
 public class LC94binaryTreeInorder {
     private List<Integer> result=new ArrayList<>();
-    public List<Integer> inorderTraversal(TreeNode root){
+    public List<Integer> inorderTraversa2(TreeNode root){
         inorder(root);
         return result;
     }
@@ -33,6 +33,32 @@ public class LC94binaryTreeInorder {
                 result.add(curr.val);
                 curr=curr.right;
             }
+        }
+        return result;
+    }
+
+    //Philip
+    public List<Integer> inorderTraversal2(TreeNode root){
+        List<Integer> result=new ArrayList<>();   //保存结果
+        if(root==null)return result;
+
+        Stack<TreeNode> stack=new Stack<>();      //用stack来做
+        TreeNode curr=root;
+
+        while(!stack.isEmpty()||curr!=null){      //很重要
+            if(curr==null){
+                curr=stack.peek();
+            }else{
+                stack.push(curr);
+                while(curr.left!=null){
+                    curr=curr.left;
+                    stack.push(curr);
+                }
+            }
+            //左树访问完了之后
+            result.add(curr.val);//访问中
+            stack.pop();
+            curr=curr.right;     //跑到右边去
         }
         return result;
     }

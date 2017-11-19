@@ -6,7 +6,7 @@ package com.ccsi.test;
 public class BigIntMutliply {
     public static void main(String[] args) {
         String a="12345678";
-        String b="87654321";
+        String b="87";
         System.out.println(bigIntMultiply(a,b));
     }
 

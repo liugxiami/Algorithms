@@ -4,6 +4,8 @@ import java.util.HashMap;
 
 /**
  * Created by gxliu on 2017/4/7.
+ * 该方法有问题，通不过leetcode测试，主要是因为如果capacity是1的情况下，head会被清空，而下面
+ * 的程序没发恢复head为空的情况。
  */
 public class LRUCache {
     public class Entry{
@@ -50,7 +52,7 @@ public class LRUCache {
             curr.next=null;
             tail=curr;
 
-            map.remove(key);
+            //map.remove(key);
             return curr.value;
         }else return -1;
     }
